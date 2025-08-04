@@ -2,14 +2,14 @@
 // @name         Better TC
 // @namespace    http://tampermonkey.net/
 // @version      0.15
-// @description  A cool userscript
+// @description  Userscript for TC that adds QOL features and more
 // @author       C418
 // @match        *://www.teen-chat.org/*
-// @require      https://github.com/chaodziejg/btc/styling.js
-// @require      https://github.com/chaodziejg/btc/options.js
-// @require      https://github.com/chaodziejg/btc/login.js
-// @require      https://github.com/chaodziejg/btc/translations.js
-// @require      https://github.com/chaodziejg/btc/chatstuff.js
+// @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/styling.js
+// @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/options.js
+// @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/login.js
+// @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/translations.js
+// @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/chatstuff.js
 // @license      MIT
 // @grant        none
 // ==/UserScript==
