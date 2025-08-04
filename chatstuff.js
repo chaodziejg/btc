@@ -57,14 +57,25 @@ function isFiltered(content) {
     }
 
     // grooming or inappropriate content
-    const baitKeywords = ['bored', 'text me', 'pm', 'pm me', 'dm me', 'text', 'text me', 'text', 'trusted', 'add me', 'msg me', 'message me', 'wanna have fun', 'want to have fun', 'skinny boys', 'skinny girls', 'fit boys', 'fit girls', 'rp', 'answer anything'];
+    const baitKeywords = ['bored', 'text me', 'pm', 'pm me', 'dm me', 'text', 'trusted', 'add me', 'msg me', 'message me', 'wanna have fun', 'want to have fun', 'skinny boys', 'skinny girls', 'fit boys', 'fit girls', 'rp', 'answer anything'];
     const tradeWords = ['trade', 'trd', 'tr ade', 'selling', 'sell', 'slling', 'slng', 'seling', 'tr@de', 'trading', 'mega', 'mga', 'lnks', 'links', 'lks', 'freaks', 'freaky', 'nked', 'nkd', 'room', 'cam', 'cams', 'spoil me', 'horny', 'sex', 'nudes', 'nut'];
     const filterForBait = ['girl', 'girls', 'boy', 'boys', 'chat', 'femboy', 'trans', 'bi', 'gay', 'anyone']
 
-    if (includesAny(normalized, baitKeywords) && /[mf]?\d{1,2}/.test(normalized)) return true;
-    if (/\b\d{1,2}\b/.test(normalized) && includesAny(normalized, baitKeywords)) return true;
-    if (normalized.includes('tg') && includesAny(normalized, baitKeywords)) return true;
-    if (includesAny(normalized, filterForBait) && includesAny(normalized, baitKeywords)) return true;
+    const hasBaitKeywords = includesAny(normalized, baitKeywords);
+    const hasFilterForBait = includesAny(normalized, filterForBait);
+    const hasAge = /[mf]?\d{1,2}/.test(normalized);
+    const hasStandaloneAge = /\b\d{1,2}\b/.test(normalized);
+    const hasTg = normalized.includes('tg');
+
+    if (
+        hasBaitKeywords &&
+        (
+            hasAge ||
+            hasStandaloneAge ||
+            hasTg ||
+            hasFilterForBait
+        )
+    ) return true;
 
     // age + gender combo patterns
     if (/[fm][\s\-_,.:']*\d{1,2}/i.test(normalized)) return true;
