@@ -77,6 +77,17 @@ function isFiltered(content) {
         )
     ) return true;
 
+    const domRoles = ['bottom', 'bottoming', 'btming', 'bttming', 'btm', 'bttm', 'sub', 'submissive', 'top', 'topping', 'dom', 'dominant', 'dominative', 'domme', 'dominator'];
+
+    const domFuzzyPatterns = domRoles.map(word => {
+        const pattern = word
+            .split('')
+            .map(char => `${char}[\\W_]*`)
+            .join('');
+        return new RegExp(pattern, 'i');
+    });
+    if (/\b\d{1,2}\b/.test(normalized) && fuzzyMatch(domFuzzyPatterns)) return true;
+
     // age + gender combo patterns
     if (/[fm][\s\-_,.:']*\d{1,2}/i.test(normalized)) return true;
     if (/\d{1,2}[\s\-_,.:']*[fm]/i.test(normalized)) return true;
