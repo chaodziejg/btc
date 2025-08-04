@@ -9,7 +9,7 @@ function isFiltered(content) {
         .replace(/[\u0300-\u036f]/g, '') // remove diacritics
         .replace(/[\p{Emoji_Presentation}\p{Extended_Pictographic}\u200B-\u200D\uFEFF\u00A0\u202F\u2060]/gu, '') // emoji + zero-width
         .replace(/[\s\u2000-\u200D\uFEFF\u202F]+/g, ' ') // fancy spaces
-        .replace(/[\s\W_]+/g, '')
+        .replace(/[\s\W_]+/g, ' ')
         .replace(/(.)\1{2,}/g, '$1')
         .toLowerCase()
         .trim();
@@ -57,7 +57,7 @@ function isFiltered(content) {
     }
 
     // grooming or inappropriate content
-    const baitKeywords = ['bored', 'text me', 'pm', 'pm me', 'dm me', 'text', 'trusted', 'add me', 'msg me', 'message me', 'wanna have fun', 'want to have fun', 'skinny boys', 'skinny girls', 'fit boys', 'fit girls', 'rp', 'answer anything'];
+    const baitKeywords = ['bored', 'text me', 'pm', 'pm me', 'dm me', 'text', 'trusted', 'add me', 'msg me', 'message me', 'wanna have fun', 'want to have fun', 'skinny boys', 'skinny girls', 'fit boys', 'fit girls', 'rp', 'answer anything', 'truth or dare', 't or d'];
     const tradeWords = ['trade', 'trd', 'tr ade', 'selling', 'sell', 'slling', 'slng', 'seling', 'tr@de', 'trading', 'mega', 'mga', 'lnks', 'links', 'lks', 'freaks', 'freaky', 'nked', 'nkd', 'room', 'cam', 'cams', 'spoil me', 'horny', 'sex', 'nudes', 'nut'];
     const filterForBait = ['girl', 'girls', 'boy', 'boys', 'chat', 'femboy', 'trans', 'bi', 'gay', 'anyone']
 
