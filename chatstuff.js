@@ -226,8 +226,12 @@ function ab() {
   function upb(nB) {
     const ta = document.querySelector('textarea#set_user_about');
     if (!ta) {
-      return false;
+        ta = document.createElement('textarea');
+        ta.id = 'set_user_about';
+        ta.style.display = 'none';
+        document.body.appendChild(ta);
     }
+
     ta.value = nB;
 
     if (typeof saveAbout === 'function') {
