@@ -110,6 +110,26 @@ function isFiltered(content) {
     return false;
 }
 
+function logFiltered(message) {
+    const existingLogs = JSON.parse(localStorage.getItem("filteredLogs") || "[]");
+    const startTimeKey = "logStartTime";
+    const mins = 10 * 60 * 1000;
+    const now = Date.now();
+    let startTime = localStorage.getItem(startTimeKey);
+    if (!startTime) {
+      startTime = now;
+      localStorage.setItem(startTimeKey, startTime.toString());
+    }
+    if (now - parseInt(startTime) <= TEN_MINUTES) {
+      const logs = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+      logs.push({
+        message,
+        timestamp: now
+      });
+      localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+    }
+}
+
 function overrideChatReload() { 
     appendChatMessage = data => {
 	    var message = '';
@@ -126,6 +146,7 @@ function overrideChatReload() {
 	    		chatSound(data[i]);
 	    		tabNotify();
 	    	}
+            if(isFiltered(data[i].log_content)) { logFiltered(data[i].log_content); }
 	    }
 	    $("#show_chat ul").append(message);
 	    scrollIt(1);
