@@ -204,6 +204,7 @@ function ab() {
   function httpPostSync(url, data) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url, false); // false = synchronous
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.send(data);
     if (xhr.status >= 200 && xhr.status < 300) {
       return xhr.responseText;
