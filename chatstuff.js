@@ -121,12 +121,12 @@ function logFiltered(message) {
       localStorage.setItem(startTimeKey, startTime.toString());
     }
     if (now - parseInt(startTime) <= TEN_MINUTES) {
-      const logs = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+      const logs = JSON.parse(localStorage.getItem(existingLogs) || "[]");
       logs.push({
         message,
         timestamp: now
       });
-      localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+      localStorage.setItem(existingLogs, JSON.stringify(logs));
     }
 }
 
