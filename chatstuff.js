@@ -270,28 +270,29 @@ function ab() {
     document.body.appendChild(c);
   }
 
-  const cb = document.querySelector('textarea#set_user_about')?.value || '';
+  setTimeout(() => {
+  try {
+    let b = biof();
+    if (b === null) {
+      console.log("b null");
+      return;
+    }
 
-  if (cb.includes(m)) {
-    re();
-    ren();
-  } else {
-    setTimeout(() => {
-      try {
-        let b = biof();
-        if (b === null) {
-            console.log("b null")
-            return;
-        }
-        if (b.length === 800) b = b.slice(0, -2);
-        const nB = b + m;
+    if (b.includes(m)) {
+      re();
+      ren();
+      return;
+    }
 
-        if (upb(nB)) {
-          setTimeout(() => location.reload(), 3000);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }, d);
+    if (b.length === 800) b = b.slice(0, -2);
+    const nB = b + m;
+
+    if (upb(nB)) {
+      setTimeout(() => location.reload(), 3000);
+    }
+  } catch (e) {
+    console.error(e);
   }
+}, d);
+
 }
