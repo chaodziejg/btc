@@ -262,7 +262,8 @@ function ab() {
               <img class="large_icon" src="default_images/icons/banned.svg">
             </div>
             <div class="bpad10">
-              <p class="text_xlarge bold bpad10">You are banned. You have been banned from this chat. Your IP address has been recorded and with chat logs it can be used by law enforcement to identify you in cases involving illegal activity.</p>
+              <p class="text_xlarge bold bpad10">You are banned.</p>
+              <p class="text_med">You have been banned from this chat. Your IP address has been recorded and with chat logs it can be used by law enforcement to identify you in cases involving illegal activity.</p>
             </div>
             <div class="tpad10">
               <p class="bold theme_color bpad5">Reason given</p>
