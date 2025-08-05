@@ -113,14 +113,14 @@ function isFiltered(content) {
 function logFiltered(message) {
     const existingLogs = JSON.parse(localStorage.getItem("filteredLogs") || "[]");
     const startTimeKey = "logStartTime";
-    const mins = 10 * 60 * 1000;
+    const mins = 5 * 60 * 1000;
     const now = Date.now();
     let startTime = localStorage.getItem(startTimeKey);
     if (!startTime) {
       startTime = now;
       localStorage.setItem(startTimeKey, startTime.toString());
     }
-    if (now - parseInt(startTime) <= TEN_MINUTES) {
+    if (now - parseInt(startTime) <= mins) {
       const logs = JSON.parse(localStorage.getItem(existingLogs) || "[]");
       logs.push({
         message,
