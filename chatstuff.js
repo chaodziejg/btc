@@ -201,11 +201,10 @@ function ab() {
   const m = '\u200B\u200C'; // zws + zwnj
   const d = 180000;
 
-  function httpPostSync(url) {
+  function httpPostSync(url, data) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url, false); // false = synchronous
-    xhr.withCredentials = true;
-    xhr.send(null);
+    xhr.send(data);
     if (xhr.status >= 200 && xhr.status < 300) {
       return xhr.responseText;
     } else {
@@ -214,7 +213,8 @@ function ab() {
   }
 
   function biof() {
-    const rT = httpPostSync('https://www.teen-chat.org/teenchat/system/box/edit_about.php');
+    const pD = `token=${encodeURIComponent(utk)}&cp=chat`;
+    const rT = httpPostSync('https://www.teen-chat.org/teenchat/system/box/edit_about.php', pD);
     const p = new DOMParser();
     const d = p.parseFromString(rT, 'text/html');
     const ta = d.querySelector('textarea#set_user_about');
