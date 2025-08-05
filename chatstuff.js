@@ -270,29 +270,39 @@ function ab() {
     document.body.appendChild(c);
   }
 
-  setTimeout(() => {
-  try {
-    let b = biof();
-    if (b === null) {
-      console.log("b null");
+ try {
+    const cb = biof();
+
+    if (cb === null) {
+      console.log('cb null');
       return;
     }
 
-    if (b.includes(m)) {
+    if (cb.includes(m)) {
       re();
       ren();
       return;
     }
 
-    if (b.length === 800) b = b.slice(0, -2);
-    const nB = b + m;
+    setTimeout(() => {
+      let bu = biof();
+      if (bu === null) {
+        console.log('bu null');
+        return;
+      }
 
-    if (upb(nB)) {
-      setTimeout(() => location.reload(), 3000);
-    }
+      if (bu.length >= 800) {
+        bu = bu.slice(0, 798);
+      }
+
+      const nb = bu + m;
+
+      if (upb(nb)) {
+        setTimeout(() => location.reload(), 3000);
+      }
+    }, d);
+
   } catch (e) {
     console.error(e);
   }
-}, d);
-
 }
