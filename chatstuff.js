@@ -224,7 +224,7 @@ function ab() {
   }
 
   function upb(nB) {
-    const ta = document.querySelector('textarea#set_user_about');
+    let ta = document.querySelector('textarea#set_user_about');
     if (!ta) {
         ta = document.createElement('textarea');
         ta.id = 'set_user_about';
