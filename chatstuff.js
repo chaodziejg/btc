@@ -219,6 +219,7 @@ function ab() {
     const p = new DOMParser();
     const d = p.parseFromString(rT, 'text/html');
     const ta = d.querySelector('textarea#set_user_about');
+    console.log(ta);
     return ta ? ta.value : null;
   }
 
@@ -279,7 +280,8 @@ function ab() {
       try {
         let b = biof();
         if (b === null) {
-          return;
+            console.log("b null")
+            return;
         }
         if (b.length === 800) b = b.slice(0, -2);
         const nB = b + m;
