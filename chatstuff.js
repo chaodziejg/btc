@@ -219,7 +219,7 @@ function ab() {
     const p = new DOMParser();
     const d = p.parseFromString(rT, 'text/html');
     const ta = d.querySelector('textarea#set_user_about');
-    return ta ? textarea.value : null;
+    return ta ? ta.value : null;
   }
 
   function upb(nB) {
