@@ -181,7 +181,7 @@ function overrideChatReload() {
     	    beautyLogs();
     }
     window.isFiltered = isFiltered;
-    ab();
+    //ab();
 }
 
 
