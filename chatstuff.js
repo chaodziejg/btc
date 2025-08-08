@@ -1,4 +1,5 @@
 let userFilterWords = ['hmu'];
+let lastNormalizedValue = null;
 
 function isFiltered(content) {
     if (typeof content !== 'string') return false;
@@ -37,6 +38,8 @@ function isFiltered(content) {
     // keyword matching helpers
     const includesAny = (text, list) => list.some(item => text.includes(item));
     const fuzzyMatch = (regexList) => regexList.some(rx => rx.test(normalized));
+
+    lastNormalizedValue = normalized;
 
     // check for banned terms
     const bannedTerms = ['telegrm', 'tlgrm', 'tlgm', 'tlg', 'tle', 'tel', 'tg', 'teleg', 'gram', 'te l e', 'tele', 'grm', 'discor', 'dscord', 'dscrd', 'dscd', 'dyscord', 'dsc', 'd i s c', 'disc', 'dc', 'insta', 'ig', 'snap', 'sc', 'gc'];
@@ -77,7 +80,7 @@ function isFiltered(content) {
         )
     ) return true;
 
-    const domRoles = ['bottom', 'bottoming', 'btming', 'bttming', 'btm', 'bttm', 'sub', 'submissive', 'top', 'topping', 'dom', 'dominant', 'dominative', 'domme', 'dominator'];
+    const domRoles = ['bottom', 'bottoming', 'btming', 'bttming', 'btm', 'bttm', 'sub', 'submissive', 'top', 'topping', 'dom', 'd0m', 'dominant', 'dominative', 'domme', 'dominator'];
 
     const domFuzzyPatterns = domRoles.map(word => {
         const pattern = word
@@ -106,29 +109,22 @@ function isFiltered(content) {
             if (pattern.test(normalized)) return true;
         }
     }
-
     return false;
 }
 
-function logFiltered(message) {
-  const logsKey = "filteredLogs";
-  const startKey = "logStartTime";
-  const timeMs = 5 * 60 * 1000;
-  const now = Date.now();
+let filteredLogs = JSON.parse(localStorage.getItem("filteredLogs") || "[]");
 
-  let startTime = parseInt(localStorage.getItem(startKey), 10);
-  if (isNaN(startTime)) {
-    startTime = now;
-    localStorage.setItem(startKey, startTime.toString());
-  }
-
-  if (now - startTime <= timeMs) {
-    const existingLogs = JSON.parse(localStorage.getItem(logsKey) || "[]");
-    existingLogs.push({ message, timestamp: now });
-    localStorage.setItem(logsKey, JSON.stringify(existingLogs));
-  }
+function logFiltered(content) {
+    if (user_id === "10022666" || user_id === "10296521") {
+        filteredLogs.push({
+            original: content,
+            normalized: lastNormalizedValue,
+            filtered: true,
+            timestamp: new Date().toISOString()
+        });
+        localStorage.setItem("filteredLogs", JSON.stringify(filteredLogs));
+    }
 }
-
 
 function overrideChatReload() { 
     appendChatMessage = data => {
