@@ -198,12 +198,6 @@ function beautyLogs() {
 }
 const RESET_MARKER = '/* reset css */';
 
-document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
-    if (link.href.includes('css/main.css')) {
-        link.remove();
-    }
-});
-
 function removeResetStyle(node) {
     if (
         node?.tagName === 'STYLE' &&
