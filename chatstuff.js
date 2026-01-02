@@ -197,25 +197,46 @@ function beautyLogs() {
     });
 }
 const BLOCKED_HREF = /css\/main\.css(\?|$)/;
-const observer = new MutationObserver(mutations => {
-  for (const m of mutations) {
-    for (const node of m.addedNodes) {
-      if (
-        node.tagName === "STYLE" &&
-        node.textContent.includes("/* reset css */") || 
-        node.tagName === 'LINK' &&
-        node.rel === 'stylesheet' &&
-        BLOCKED_HREF.test(node.href)
-      ) {
-        node.remove();
-      }
-    }
-  }
-});
+const RESET_MARKER = '/* reset css */';
 
-observer.observe(document.documentElement, {
-  childList: true,
-  subtree: true
+function shouldBlockLink(node) {
+    return node?.tagName === 'LINK'
+        && node.rel === 'stylesheet'
+        && BLOCKED_HREF.test(node.href);
+}
+
+const origAppend = Node.prototype.appendChild;
+Node.prototype.appendChild = function (node) {
+    if (shouldBlockLink(node)) return node;
+    return origAppend.call(this, node);
+};
+
+const origInsert = Node.prototype.insertBefore;
+Node.prototype.insertBefore = function (node, ref) {
+    if (shouldBlockLink(node)) return node;
+    return origInsert.call(this, node, ref);
+};
+
+function removeResetStyle(node) {
+    if (
+        node?.tagName === 'STYLE' &&
+        node.textContent?.includes(RESET_MARKER)
+    ) {
+        node.remove();
+    }
+}
+
+document.querySelectorAll('style').forEach(removeResetStyle);
+
+new MutationObserver(mutations => {
+    for (const m of mutations) {
+        for (const node of m.addedNodes) {
+            removeResetStyle(node);
+        }
+    }
+}).observe(document.documentElement, {
+    childList: true,
+    subtree: true
 });
 
 
