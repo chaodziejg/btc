@@ -264,43 +264,56 @@ const observer = new MutationObserver(fixBorderRadius);
 observer.observe(document, { childList: true, subtree: true });
 
 const css = `
-/* Revert private_top padding */
-#private_top {
-    padding: 0 5px !important;
-}
+    /* HEADER PADDING (already confirmed working) */
+    #private_top {
+        padding: 0 5px !important;
+    }
 
-/* Restore original float behavior */
-.target_private,
-.targ_quote {
-    float: right !important;
-}
+    /* === CHAT BUBBLE FLOAT FIX === */
 
-.hunter_private,
-.hunt_quote {
-    float: none !important;
-}
+    /* Block 2 forces hunter messages right – undo it */
+    .private_logs .hunter_private {
+        float: none !important;
+    }
 
-/* Restore original inpriv logic */
-.inpriv .prdate {
-    text-align: right !important;
-}
+    .private_logs .hunt_quote {
+        float: none !important;
+    }
 
-.inpriv .ppitem {
-    float: right !important;
-}
+    /* Restore block 1 behavior */
+    .private_logs .target_private,
+    .private_logs .targ_quote {
+        float: right !important;
+    }
 
-.inpriv .privopt {
-    text-align: right !important;
-}
+    /* === PRIV CONTEXT FIX === */
 
-/* Neutralize outpriv overrides */
-.outpriv .prdate,
-.outpriv .privopt {
-    text-align: initial !important;
-}
+    /* Restore inpriv behavior */
+    .private_logs.inpriv .prdate {
+        text-align: right !important;
+    }
 
-.outpriv .ppitem {
-    float: left !important;
+    .private_logs.inpriv .ppitem {
+        float: right !important;
+    }
+
+    .private_logs.inpriv .privopt {
+        text-align: right !important;
+    }
+
+    /* Kill outpriv influence completely */
+    .private_logs.outpriv .ppitem {
+        float: left !important;
+    }
+
+    .private_logs.outpriv .privopt,
+    .private_logs.outpriv .prdate {
+        text-align: initial !important;
+    }
+
+.vpad15 { 
+    padding-top: 15px; 
+    padding-bottom: 5px; 
 }
 `;
 
