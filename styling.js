@@ -263,54 +263,15 @@ window.addEventListener('DOMContentLoaded', fixBorderRadius);
 const observer = new MutationObserver(fixBorderRadius);
 observer.observe(document, { childList: true, subtree: true });
 
-const css = `
-    /* HEADER PADDING (already confirmed working) */
-    #private_top {
-        padding: 0 5px !important;
-    }
+  const css = `
+    /* restore old bubble alignment */
+    .target_private { float: right !important; }
+    .hunter_private { float: left !important; }
+    .hunt_quote { float: left !important; }
+    .targ_quote { float: right !important; }
 
-    /* === CHAT BUBBLE FLOAT FIX === */
-
-    /* Block 2 forces hunter messages right – undo it */
-    .private_logs .hunter_private {
-        float: none !important;
-    }
-
-    .private_logs .hunt_quote {
-        float: none !important;
-    }
-
-    /* Restore block 1 behavior */
-    .private_logs .target_private,
-    .private_logs .targ_quote {
-        float: right !important;
-    }
-
-    /* === PRIV CONTEXT FIX === */
-
-    /* Restore inpriv behavior */
-    .private_logs.inpriv .prdate {
-        text-align: right !important;
-    }
-
-    .private_logs.inpriv .ppitem {
-        float: right !important;
-    }
-
-    .private_logs.inpriv .privopt {
-        text-align: right !important;
-    }
-
-    /* Kill outpriv influence completely */
-    .private_logs.outpriv .ppitem {
-        float: left !important;
-    }
-
-    .private_logs.outpriv .privopt,
-    .private_logs.outpriv .prdate {
-        text-align: initial !important;
-    }
-
+    /* restore header spacing */
+    #private_top { padding: 0 5px !important; }
 .vpad15 { 
     padding-top: 15px; 
     padding-bottom: 5px; 
