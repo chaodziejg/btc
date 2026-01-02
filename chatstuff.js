@@ -184,6 +184,18 @@ function overrideChatReload() {
     //ab();
 }
 
+function beautyLogs() {
+    const logs = document.querySelectorAll('.ch_logs');
+    logs.forEach(el => el.classList.remove('log2'));
+    const visibleLogs = Array.from(logs).filter(el => {
+        return el.offsetParent !== null;
+    });
+    visibleLogs.forEach((el, index) => {
+        if (index % 2 === 0) {
+            el.classList.add('log2');
+        }
+    });
+}
 
 
 
