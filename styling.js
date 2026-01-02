@@ -213,10 +213,10 @@ const ignoreSelectors = [
 
 function shouldIgnore(selectorText) {
     if (!selectorText) return false;
-    if (ignoreSelectors.some(sel => selectorText.selectorText.split(',').some(s => s.trim().startsWith(sel)))) {
+    if (ignoreSelectors.some(sel => selectorText.split(',').some(s => s.trim().startsWith(sel)))) {
         return true;
     }
-    const selectors = selectorText.selectorText.split(',');
+    const selectors = selectorText.split(',');
     for (let sel of selectors) {
         sel = sel.trim();
         if (sel.includes('.cavatar') && sel.includes('.avav') && sel.includes('.avagen')) {
@@ -247,7 +247,7 @@ function fixBorderRadius() {
     }
 }
 
-window.addEventListener('load', fixBorderRadius);
+window.addEventListener('DOMContentLoaded', fixBorderRadius);
 
 const observer = new MutationObserver(fixBorderRadius);
-observer.observe(document.head, { childList: true, subtree: true });
+observer.observe(document, { childList: true, subtree: true });
