@@ -262,3 +262,44 @@ window.addEventListener('DOMContentLoaded', fixBorderRadius);
 
 const observer = new MutationObserver(fixBorderRadius);
 observer.observe(document, { childList: true, subtree: true });
+
+
+// revert #private_top padding
+const privateTop = document.getElementById('private_top');
+if (privateTop) {
+    privateTop.style.padding = '0 5px'; // revert from 0 10px
+}
+
+// revert chat bubble floats and alignment
+document.querySelectorAll('.hunt_quote').forEach(el => {
+    el.style.float = 'none'; // remove float:right that was added in block 2
+});
+document.querySelectorAll('.hunter_private').forEach(el => {
+    el.style.float = 'none'; // revert float:right
+});
+document.querySelectorAll('.targ_quote').forEach(el => {
+    el.style.float = 'right'; // ensure target quotes stay right
+});
+document.querySelectorAll('.target_private').forEach(el => {
+    el.style.float = 'right'; // ensure target_private floats right
+});
+
+// revert inpriv/outpriv classes
+document.querySelectorAll('.outpriv .prdate').forEach(el => {
+    el.style.textAlign = ''; // clear overridden style
+});
+document.querySelectorAll('.outpriv .ppitem').forEach(el => {
+    el.style.float = ''; // clear overridden style
+});
+document.querySelectorAll('.outpriv .privopt').forEach(el => {
+    el.style.textAlign = ''; // clear overridden style
+});
+document.querySelectorAll('.inpriv .prdate').forEach(el => {
+    el.style.textAlign = 'right';
+});
+document.querySelectorAll('.inpriv .ppitem').forEach(el => {
+    el.style.float = 'right';
+});
+document.querySelectorAll('.inpriv .privopt').forEach(el => {
+    el.style.textAlign = 'right';
+});
