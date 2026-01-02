@@ -264,14 +264,26 @@ const observer = new MutationObserver(fixBorderRadius);
 observer.observe(document, { childList: true, subtree: true });
 
   const css = `
-    /* restore old bubble alignment */
-    .target_private { float: right !important; }
-    .hunter_private { float: left !important; }
-    .hunt_quote { float: left !important; }
-    .targ_quote { float: right !important; }
+    /* restore old private bubble alignment */
+    .private_content {
+        text-align: left !important;
+    }
 
-    /* restore header spacing */
-    #private_top { padding: 0 5px !important; }
+    .target_private,
+    .targ_quote {
+        text-align: left !important;
+        margin-left: auto !important;
+        margin-right: 0 !important;
+        display: inline-block !important;
+    }
+
+    .hunter_private,
+    .hunt_quote {
+        text-align: left !important;
+        margin-right: auto !important;
+        margin-left: 0 !important;
+        display: inline-block !important;
+    }
 .vpad15 { 
     padding-top: 15px; 
     padding-bottom: 5px; 
