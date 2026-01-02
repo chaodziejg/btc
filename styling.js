@@ -211,6 +211,16 @@ const ignoreSelectors = [
     '.get_info.avatar_private'
 ];
 
+function matchesClasses(selector, requiredClasses, prefixClasses) {
+    for (const cls of requiredClasses) {
+        if (!new RegExp(`\\.${cls}(\\b|:)`).test(selector)) return false;
+    }
+    if (!prefixClasses.some(pref => new RegExp(`\\.${pref}\\w*(\\b|:)`).test(selector))) return false;
+
+    return true;
+}
+
+
 function shouldIgnore(selectorText) {
     if (!selectorText) return false;
     if (ignoreSelectors.some(sel => selectorText.split(',').some(s => s.trim().startsWith(sel)))) {
@@ -219,7 +229,7 @@ function shouldIgnore(selectorText) {
     const selectors = selectorText.split(',');
     for (let sel of selectors) {
         sel = sel.trim();
-        if (sel.includes('.cavatar') && sel.includes('.avav') && sel.includes('.avagen')) {
+        if (matchesClasses(sel, ['avav', 'acav', 'avagen'], ['gen'])) {
             return true;
         }
     }
