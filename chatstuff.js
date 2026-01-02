@@ -196,26 +196,13 @@ function beautyLogs() {
         }
     });
 }
-const BLOCKED_HREF = /css\/main\.css(\?|$)/;
 const RESET_MARKER = '/* reset css */';
 
-function shouldBlockLink(node) {
-    return node?.tagName === 'LINK'
-        && node.rel === 'stylesheet'
-        && BLOCKED_HREF.test(node.href);
-}
-
-const origAppend = Node.prototype.appendChild;
-Node.prototype.appendChild = function (node) {
-    if (shouldBlockLink(node)) return node;
-    return origAppend.call(this, node);
-};
-
-const origInsert = Node.prototype.insertBefore;
-Node.prototype.insertBefore = function (node, ref) {
-    if (shouldBlockLink(node)) return node;
-    return origInsert.call(this, node, ref);
-};
+document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+    if (link.href.includes('css/main.css')) {
+        link.disabled = true;
+    }
+});
 
 function removeResetStyle(node) {
     if (
