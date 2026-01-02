@@ -198,6 +198,27 @@ if (logo) {
     };
 }
 
+const ignoreSelectors = [
+    '.avatar_profile',
+    '.avflag',
+    '.glob_av',
+    '.tpicon',
+    '.avatar_menu.glob_av',
+    '.cavatar.avav.avagen',
+    '#content',
+    '.add_comment.full_input',
+    '.pm_notify.private_count.bnotify',
+    '#message_content',
+    '.get_info.avatar_private'
+];
+
+function shouldIgnore(selectorText) {
+    if (!selectorText) return false;
+    return ignoreSelectors.some(sel => {
+        return selectorText.split(',').some(s => s.trim().startsWith(sel));
+    });
+}
+
 function fixBorderRadius() {
     for (const sheet of document.styleSheets) {
         try {
@@ -206,6 +227,8 @@ function fixBorderRadius() {
 
             for (const rule of rules) {
                 if (rule.style && rule.style.borderRadius) {
+                    if (shouldIgnore(rule.selectorText)) continue;
+
                     if (rule.style.borderRadius !== '10px') {
                         rule.style.borderRadius = '10px';
                     }
@@ -216,6 +239,8 @@ function fixBorderRadius() {
         }
     }
 }
+
+window.addEventListener('load', fixBorderRadius);
 
 const observer = new MutationObserver(fixBorderRadius);
 observer.observe(document.head, { childList: true, subtree: true });
