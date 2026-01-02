@@ -197,6 +197,23 @@ function beautyLogs() {
     });
 }
 
+const observer = new MutationObserver(mutations => {
+  for (const m of mutations) {
+    for (const node of m.addedNodes) {
+      if (
+        node.tagName === "STYLE" &&
+        node.textContent.includes("/* reset css */")
+      ) {
+        node.remove();
+      }
+    }
+  }
+});
+
+observer.observe(document.documentElement, {
+  childList: true,
+  subtree: true
+});
 
 
 
