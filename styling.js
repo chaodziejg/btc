@@ -311,6 +311,12 @@ style.textContent = `
         padding: 0px 2px;
         flex-grow: 0;
     }
+    .inpriv .privcont {
+        justify-content: flex-end;
+    }
+    .outpriv .privcont {
+        justify-content: flex-start;
+    }
 
     .vpad15 { 
         padding-top: 15px; 
