@@ -245,8 +245,9 @@ function fixBorderRadius() {
             for (const rule of rules) {
                 if (rule.style && rule.style.borderRadius) {
                     if (shouldIgnore(rule.selectorText)) continue;
-                    console.log("applying to: ", rule);
+
                     if (rule.style.borderRadius !== '10px') {
+                        console.log("applying to: ", rule, " current data: ", rule.style.borderRadius);
                         rule.style.borderRadius = '10px';
                     }
                 }
