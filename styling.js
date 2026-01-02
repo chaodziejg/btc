@@ -223,6 +223,7 @@ function shouldIgnore(selectorText) {
             return true;
         }
     }
+    return false;
 }
 
 function fixBorderRadius() {
