@@ -265,6 +265,20 @@ observer.observe(document, { childList: true, subtree: true });
 
 const style = document.createElement('style');
 style.textContent = `
+#show_private,
+#show_private_wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+#show_private {
+  flex: 1 1 auto;
+}
+
+.private_logs {
+  width: 100%;
+}
+
   .private_logs {
     display: flex !important;
     align-items: flex-start;
