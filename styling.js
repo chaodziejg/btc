@@ -246,7 +246,7 @@ function fixBorderRadius() {
                 if (rule.style && rule.style.borderRadius) {
                     if (shouldIgnore(rule.selectorText)) continue;
 
-                    if (rule.style.borderRadius !== '10px') {
+                    if (rule.style.borderRadius === '20px') {
                         console.log("applying to: ", rule, " current data: ", rule.style.borderRadius);
                         rule.style.borderRadius = '10px';
                     }
