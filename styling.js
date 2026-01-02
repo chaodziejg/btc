@@ -263,34 +263,22 @@ window.addEventListener('DOMContentLoaded', fixBorderRadius);
 const observer = new MutationObserver(fixBorderRadius);
 observer.observe(document, { childList: true, subtree: true });
 
-  const css = `
-    /* restore old private bubble alignment */
-    .private_content {
-        text-align: left !important;
-    }
+const style = document.createElement('style');
+style.textContent = `
+  .private_logs {
+    display: flex !important;
+    align-items: flex-start;
+  }
 
-    .target_private,
-    .targ_quote {
-        text-align: left !important;
-        margin-left: auto !important;
-        margin-right: 0 !important;
-        display: inline-block !important;
-    }
-
-    .hunter_private,
-    .hunt_quote {
-        text-align: left !important;
-        margin-right: auto !important;
-        margin-left: 0 !important;
-        display: inline-block !important;
+  .outpriv .private_logs {
+    flex-direction: row-reverse !important;
+  }
+      #private_top {
+        padding: 0 5px !important;
     }
 .vpad15 { 
     padding-top: 15px; 
     padding-bottom: 5px; 
 }
 `;
-
-const style = document.createElement('style');
-style.type = 'text/css';
-style.appendChild(document.createTextNode(css));
 document.head.appendChild(style);
