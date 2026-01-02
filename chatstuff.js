@@ -196,13 +196,16 @@ function beautyLogs() {
         }
     });
 }
-
+const BLOCKED_HREF = /css\/main\.css(\?|$)/;
 const observer = new MutationObserver(mutations => {
   for (const m of mutations) {
     for (const node of m.addedNodes) {
       if (
         node.tagName === "STYLE" &&
-        node.textContent.includes("/* reset css */")
+        node.textContent.includes("/* reset css */") || 
+        node.tagName === 'LINK' &&
+        node.rel === 'stylesheet' &&
+        BLOCKED_HREF.test(node.href)
       ) {
         node.remove();
       }
