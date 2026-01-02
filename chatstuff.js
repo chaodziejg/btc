@@ -200,7 +200,7 @@ const RESET_MARKER = '/* reset css */';
 
 document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
     if (link.href.includes('css/main.css')) {
-        link.disabled = true;
+        link.remove();
     }
 });
 
