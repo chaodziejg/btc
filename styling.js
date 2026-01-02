@@ -204,7 +204,6 @@ const ignoreSelectors = [
     '.glob_av',
     '.tpicon',
     '.avatar_menu.glob_av',
-    '.cavatar.avav.avagen',
     '#content',
     '.add_comment.full_input',
     '.pm_notify.private_count.bnotify',
@@ -214,9 +213,16 @@ const ignoreSelectors = [
 
 function shouldIgnore(selectorText) {
     if (!selectorText) return false;
-    return ignoreSelectors.some(sel => {
-        return selectorText.split(',').some(s => s.trim().startsWith(sel));
-    });
+    if (ignoreSelectors.some(sel => selectorText.selectorText.split(',').some(s => s.trim().startsWith(sel)))) {
+        return true;
+    }
+    const selectors = selectorText.selectorText.split(',');
+    for (let sel of selectors) {
+        sel = sel.trim();
+        if (sel.includes('.cavatar') && sel.includes('.avav') && sel.includes('.avagen')) {
+            return true;
+        }
+    }
 }
 
 function fixBorderRadius() {
