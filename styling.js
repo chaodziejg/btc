@@ -197,3 +197,25 @@ if (logo) {
         newSrc: logo.src
     };
 }
+
+function fixBorderRadius() {
+    for (const sheet of document.styleSheets) {
+        try {
+            const rules = sheet.cssRules || sheet.rules;
+            if (!rules) continue;
+
+            for (const rule of rules) {
+                if (rule.style && rule.style.borderRadius) {
+                    if (rule.style.borderRadius !== '10px') {
+                        rule.style.borderRadius = '10px';
+                    }
+                }
+            }
+        } catch (e) {
+            continue;
+        }
+    }
+}
+
+const observer = new MutationObserver(fixBorderRadius);
+observer.observe(document.head, { childList: true, subtree: true });
