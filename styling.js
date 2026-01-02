@@ -265,6 +265,17 @@ observer.observe(document, { childList: true, subtree: true });
 
 const style = document.createElement('style');
 style.textContent = `
+  .private_logs {
+    display: flex !important;
+    align-items: flex-start;
+  }
+
+  .outpriv .private_logs {
+    flex-direction: row-reverse !important;
+}
+    .inpriv .private_logs {
+    flex-direction: row-reverse !important;
+    }
       #private_top {
         padding: 0 5px !important;
     }
@@ -274,10 +285,3 @@ style.textContent = `
 }
 `;
 document.head.appendChild(style);
-document.querySelectorAll('.outpriv .private_logs').forEach(log => {
-  const avatar = log.querySelector('.private_avatar');
-  const wrap = log.querySelector('.priwrap');
-  if (avatar && wrap) {
-    log.insertBefore(avatar, wrap);
-  }
-});
