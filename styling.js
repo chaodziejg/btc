@@ -288,11 +288,11 @@ style.textContent = `
         display: flex !important;
         align-items: flex-start;
     }
-    .outpriv.prdate {
+    .outpriv .prdate {
         display: flex;
         justify-content: left;
     }
-    .inpriv.prdate {
+    .inpriv .prdate {
         display: flex;
         justify-content: right;
     }
