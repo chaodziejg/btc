@@ -1,5 +1,5 @@
 
-# teen-chat.org QOL Userscript
+# Better TeenChat (BTC)
 
 A **quality‑of‑life userscript** for TeenChat that modernizes the UI, restores legacy features, and adds powerful safety and usability improvements that the official platform lacks.
 
