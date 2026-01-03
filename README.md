@@ -50,7 +50,7 @@ This script is focused on **better UX, customization, and user safety**, while s
 
 ---
 
-## Planned Features
+### Planned Features
 
 * **Fully revamped settings menu**
     * Toggle new vs old look
