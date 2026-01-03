@@ -1,27 +1,29 @@
-// stop profile music autoplay
-window.loadProMusic = function () {
-    const audio = document.getElementById('promusic');
-    const player = document.getElementById('proplayer');
+function fixProMs() {
+    // stop profile music autoplay
+    window.loadProMusic = function () {
+        const audio = document.getElementById('promusic');
+        const player = document.getElementById('proplayer');
 
-    if (!audio) return;
+        if (!audio) return;
 
-    const audioSource = audio.getAttribute('data-pmusic');
-    if (!audioSource) return;
+        const audioSource = audio.getAttribute('data-pmusic');
+        if (!audioSource) return;
 
-    audio.src = audioSource;
-    audio.load();
+        audio.src = audioSource;
+        audio.load();
 
-    const playIcon = document.querySelector('.proplayer_play');
-    const beatIcon = document.querySelector('.proplayer_beat');
+        const playIcon = document.querySelector('.proplayer_play');
+        const beatIcon = document.querySelector('.proplayer_beat');
 
-    if (playIcon) {
-        playIcon.setAttribute('src', 'default_images/icons/play.svg');
-    }
-    if (beatIcon) {
-        beatIcon.setAttribute('src', 'default_images/profile/wavestop.gif');
-    }
+        if (playIcon) {
+            playIcon.setAttribute('src', 'default_images/icons/play.svg');
+        }
+        if (beatIcon) {
+            beatIcon.setAttribute('src', 'default_images/profile/wavestop.gif');
+        }
 
-    if (player) {
-        player.setAttribute('data-state', '0');
-    }
-};
+        if (player) {
+            player.setAttribute('data-state', '0');
+        }
+    };
+}

@@ -27,6 +27,7 @@
         loadTranlations();
         btcoptions();
         overrideChatReload();
+        fixProMs();
         function isInnactive() { }
     }
     if (containsLoginDefaults()) {
