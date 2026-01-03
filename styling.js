@@ -328,7 +328,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-const GITHUB_BASE = "https://raw.githubusercontent.com/chaodziejg/btc/refs/heads/main/images/";
+const base = "https://raw.githubusercontent.com/chaodziejg/btc/refs/heads/main/images/";
 
 const imageMap = {
     "default_images/badge/badge_beat.svg": "badge_beat.svg",
@@ -352,10 +352,10 @@ function replaceImages(root = document) {
         if (el.tagName === "IMG") {
             for (const oldPath in imageMap) {
                 if (el.src?.includes(oldPath)) {
-                    el.src = GITHUB_BASE + imageMap[oldPath];
+                    el.src = base + imageMap[oldPath];
                 }
                 if (el.dataset?.src?.includes(oldPath)) {
-                    el.dataset.src = GITHUB_BASE + imageMap[oldPath];
+                    el.dataset.src = base + imageMap[oldPath];
                 }
             }
         }

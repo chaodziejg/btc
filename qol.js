@@ -1,6 +1,6 @@
 function fixProMs() {
     // stop profile music autoplay
-    window.loadProMusic = function () {
+    loadProMusic = function () {
         const audio = document.getElementById('promusic');
         const player = document.getElementById('proplayer');
 
