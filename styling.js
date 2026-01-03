@@ -327,3 +327,52 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+const GITHUB_BASE = "https://raw.githubusercontent.com/chaodziejg/btc/refs/heads/main/images/";
+
+const imageMap = {
+    "default_images/badge/badge_beat.svg": "badge_beat.svg",
+    "default_images/badge/badge_auth.svg": "badge_auth.svg",
+    "default_images/badge/badge_chat.svg": "badge_chat.svg",
+    "default_images/badge/badge_friend.svg": "badge_friend.svg",
+    "default_images/badge/badge_gift.svg": "badge_gift.svg",
+    "default_images/badge/badge_gold.svg": "badge_gold.svg",
+    "default_images/badge/badge_like.svg": "badge_like.svg",
+    "default_images/badge/badge_ruby.svg": "badge_ruby.svg",
+    "default_images/badge/badge_top.svg": "badge_top.svg",
+    "default_images/icons/nodata.svg": "nodata.svg",
+};
+
+for (let i = 1; i <= 15; i++) {
+    imageMap[`default_images/badge/badge_member${i}.svg`] = `badge_member${i}.svg`;
+}
+
+function replaceImages(root = document) {
+    root.querySelectorAll("*").forEach(el => {
+        if (el.tagName === "IMG") {
+            for (const oldPath in imageMap) {
+                if (el.src?.includes(oldPath)) {
+                    el.src = GITHUB_BASE + imageMap[oldPath];
+                }
+                if (el.dataset?.src?.includes(oldPath)) {
+                    el.dataset.src = GITHUB_BASE + imageMap[oldPath];
+                }
+            }
+        }
+    });
+}
+
+replaceImages();
+
+const imgObs = new MutationObserver(mutations => {
+    mutations.forEach(m =>
+        m.addedNodes.forEach(node => {
+            if (node.nodeType === 1) replaceImages(node);
+        })
+    );
+});
+
+imgObs.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+});

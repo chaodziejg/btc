@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Better TC
 // @namespace    http://tampermonkey.net/
-// @version      0.17
+// @version      0.19
 // @description  Userscript for TC that adds QOL features and more
 // @author       C418
 // @match        *://www.teen-chat.org/*
@@ -11,12 +11,7 @@
 // @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/translations.js
 // @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/chatstuff.js
 // @license      MIT
-// @resource     main https://github.com/chaodziejg/btc/raw/refs/heads/main/main.css
-// @grant        GM_addStyle
-// @grant        GM_getResourceText
 // ==/UserScript==
-
-GM_addStyle(GM_getResourceText("main"));
 
 (function() {
     'use strict';
