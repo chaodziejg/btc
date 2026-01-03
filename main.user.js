@@ -10,6 +10,7 @@
 // @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/login.js
 // @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/translations.js
 // @require      https://github.com/chaodziejg/btc/raw/refs/heads/main/chatstuff.js
+// @reqiore      https://github.com/chaodziejg/btc/raw/refs/heads/main/qol.js
 // @license      MIT
 // ==/UserScript==
 
