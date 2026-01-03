@@ -41,7 +41,7 @@ function setUserTheme() {
     console.error("Error:", error);
 });
 
-    const element = document.querySelector('div.proitem[onclick="getDisplaySetting();"]');
+    /*const element = document.querySelector('div.proitem[onclick="getDisplaySetting();"]');
     element.onclick = function () {
         console.log("BTC settings clicked!");
     };
@@ -63,7 +63,7 @@ function setUserTheme() {
           </svg>
           BTC settings
         `;
-    }
+    }*/
 }
 }
 
